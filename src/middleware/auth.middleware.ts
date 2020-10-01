@@ -9,7 +9,6 @@ const jwtOption = {
 passport.use(
   "jwt",
   new jwtStrategy(jwtOption, (jwtPayload, done) => {
-    console.log(jwtPayload);
     return done(false, { username: "andrey", id: 17 });
   })
 );
