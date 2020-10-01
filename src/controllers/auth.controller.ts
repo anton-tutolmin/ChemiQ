@@ -14,6 +14,10 @@ export class AuthController {
     const token = await this.authService.register({ ...req.body });
     res.send({ token });
   }
+
+  public async profile(req: Request, res: Response, next: NextFunction) {
+    res.send(req.user);
+  }
 }
 
 export const authController = new AuthController(tokenService);

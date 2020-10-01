@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AuthController, authController } from "../controllers/auth.controller";
+import { jwtMiddlewate } from "../middleware/auth.middleware";
 
 export class AuthRouter {
   constructor(private router: Router, private controller: AuthController) {
@@ -24,9 +25,7 @@ export class AuthRouter {
     this.router
       .route("/profile")
 
-      .get(async (req, res, next) => {
-        res.send("ok");
-      });
+      .get(jwtMiddlewate, this.controller.profile.bind(this.controller));
   }
 }
 
