@@ -1,13 +1,19 @@
 import express from "express";
+import bodyParser from "body-parser";
+import pino from "pino";
+import { apiRouter } from "./routers/api.router";
+
+const logger = pino();
 
 const PORT = 8080;
 
 const app: express.Application = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(apiRouter);
 
 app.listen(PORT, () => {
-  console.log(`[SERVER]: server is running on http://localhost:${PORT}`);
+  logger.info(`[SERVER]: server is running on http://localhost:${PORT}`);
 });

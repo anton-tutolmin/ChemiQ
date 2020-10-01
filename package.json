@@ -8,7 +8,7 @@
     "build": "npm run tsc",
     "start": "node .",
     "dev:start": "npm-run-all build start",
-    "dev": "nodemon --watch src --exec npm run dev:start",
+    "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start | pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,13 +22,17 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.3.3",
-    "pg-promise": "^10.6.1"
+    "pg-promise": "^10.6.1",
+    "pino": "^6.6.1",
+    "pino-pretty": "^4.2.1"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.8",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.11.2",
     "@types/pg": "^7.14.5",
+    "@types/pino": "^6.3.2",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
