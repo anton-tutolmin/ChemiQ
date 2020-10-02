@@ -17,6 +17,6 @@ app.use(passport.initialize());
 
 app.use(apiRouter);
 
-app.listen(PORT, () => {
+app.listen(PORT, "192.168.1.1", () => {
   logger.info(`[SERVER]: server is running on http://localhost:${PORT}`);
 });
