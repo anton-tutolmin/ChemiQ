@@ -1,36 +1,40 @@
 import { Router } from "express";
+import { UserController, userController } from "../controllers/user.controller";
 
 export class UserRouter {
-  constructor(private router: Router, private userController: UserController) {
+  constructor(
+    private _router: Router,
+    private _userController: UserController
+  ) {
     this.setupRouter();
   }
 
   get userRouter(): Router {
-    return this.router;
+    return this._router;
   }
 
   private setupRouter() {
-    this.router
+    this._router
       .route("/")
 
       // GET /users/
-      .get(this.userController.getAll.bind(this.userController))
+      .get(this._userController.getAll.bind(this._userController))
 
       // POST /users/
-      .post(this.userController.create.bind(this.userController));
+      .post(this._userController.create.bind(this._userController));
 
-    this.router
+    this._router
       .route("/:id")
 
       // GET /users/:id
-      .get(this.userController.getById.bind(this.userController))
+      .get(this._userController.getById.bind(this._userController))
 
       // PUT /users/:id
-      .put(this.userController.updateById.bind(this.userController))
+      .put(this._userController.updateById.bind(this._userController))
 
       // DELETE /users/:id
-      .delete(this.userController.deleteById.bind(this.userController));
+      .delete(this._userController.deleteById.bind(this._userController));
   }
 }
 
-export const userRouter = new UserRouter(Router());
+export const userRouter = new UserRouter(Router(), userController).userRouter;

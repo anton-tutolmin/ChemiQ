@@ -1,0 +1,21 @@
+version: "3.8"
+
+volumes:
+  db-data:
+
+services:
+  db:
+    image: postgres:latest
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: chemiq
+      POSTGRES_PASSWORD: chemi@Q
+
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./ops/db-backups:/backup
+
+    ports:
+      - 5432:5432

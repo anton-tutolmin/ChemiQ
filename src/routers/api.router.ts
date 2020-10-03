@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authRouter } from "./auth.router";
+import { userRouter } from "./user.router";
 
 export interface IRouter {
   url: string;
@@ -26,6 +27,9 @@ export class ApiRouter {
   }
 }
 
-const routesArr: IRouter[] = [{ url: "/auth", router: authRouter }];
+const routesArr: IRouter[] = [
+  { url: "/auth", router: authRouter },
+  { url: "/users", router: userRouter },
+];
 
 export const apiRouter = new ApiRouter(Router(), routesArr).apiRouter;
