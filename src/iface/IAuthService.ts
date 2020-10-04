@@ -1,5 +1,4 @@
 export interface IAuthService {
-  login(user: any): string;
-
-  register(user: any): string;
+  login(user: any): Promise<string>;
+  register(user: any): Promise<string>;
 }

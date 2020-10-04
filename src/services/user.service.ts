@@ -13,8 +13,16 @@ export class UserService {
     return await this._resource.getAll();
   }
 
-  public getById(id: number): Promise<any> {
-    return this._resource.getById(id);
+  public async getById(id: number): Promise<any> {
+    return await this._resource.getById(id);
+  }
+
+  public async getByUsername(username: string): Promise<any> {
+    return await this._resource.getByUsername(username);
+  }
+
+  public async getByEmail(email: string): Promise<any> {
+    return await this._resource.getByEmail(email);
   }
 
   public async updateById(id: number, paramsBody: any): Promise<string> {

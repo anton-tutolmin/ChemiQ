@@ -6,7 +6,7 @@ export class AuthController {
   constructor(private authService: IAuthService) {}
 
   public async login(req: Request, res: Response, next: NextFunction) {
-    const token = this.authService.login({ ...req.body });
+    const token = await this.authService.login({ ...req.body });
     res.send({ token });
   }
 
@@ -16,7 +16,7 @@ export class AuthController {
   }
 
   public async profile(req: Request, res: Response, next: NextFunction) {
-    res.send(req.user);
+    res.send({ user: req.user });
   }
 }
 

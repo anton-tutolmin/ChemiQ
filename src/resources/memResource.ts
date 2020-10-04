@@ -18,6 +18,14 @@ export class MemResource implements IUserResource {
     return this._userDb.find((u) => u.id === id);
   }
 
+  public async getByUsername(username: string): Promise<any> {
+    return this._userDb.find((u) => u.username === username);
+  }
+
+  public async getByEmail(email: string): Promise<any> {
+    return this._userDb.find((u) => u.email === email);
+  }
+
   public async updateById(id: number, params: any): Promise<void> {
     const user = this._userDb.find((u) => u.id === id);
     Object.keys(params).forEach((param) => {
