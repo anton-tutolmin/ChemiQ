@@ -11,12 +11,12 @@ export class UserController {
 
   public async getAll(req: Request, res: Response, next: NextFunction) {
     const users: any = await this._userService.getAll();
-    return res.json(users);
+    return res.json({ users });
   }
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     const user: any = await this._userService.getById(+req.params.id);
-    return res.json(user);
+    return res.json({ user });
   }
 
   public async updateById(req: Request, res: Response, next: NextFunction) {
