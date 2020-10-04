@@ -1,35 +1,31 @@
-export class UserService {
-  constructor(private _users: any[], private _lastId: number) {}
+import { IUserResource } from "../iface/IUserResource";
+import { memResource } from "../resources/memResource";
 
-  public create(userBody: any): string {
-    this._users.push({
-      ...userBody,
-      id: ++this._lastId,
-    });
+export class UserService {
+  constructor(private _resource: IUserResource) {}
+
+  public async create(userBody: any): Promise<string> {
+    await this._resource.create(userBody);
     return "User created";
   }
 
-  public getAll(): any {
-    return this._users;
+  public async getAll(): Promise<any> {
+    return await this._resource.getAll();
   }
 
-  public getById(id: number) {
-    const user = this._users.find((u) => u.id === id);
-    return user;
+  public getById(id: number): Promise<any> {
+    return this._resource.getById(id);
   }
 
-  public updateById(id: number, paramsBody: any) {
-    const user = this._users.find((u) => u.id === id);
-    Object.keys(paramsBody).forEach((param) => {
-      user[param] = paramsBody[param];
-    });
+  public async updateById(id: number, paramsBody: any): Promise<string> {
+    await this._resource.updateById(id, paramsBody);
     return "User updated";
   }
 
-  public deleteById(id: number) {
-    this._users = this._users.filter((u) => u.id !== id);
+  public async deleteById(id: number): Promise<string> {
+    await this._resource.deleteById(id);
     return "User deleted";
   }
 }
 
-export const userService = new UserService([], 0);
+export const userService = new UserService(memResource);

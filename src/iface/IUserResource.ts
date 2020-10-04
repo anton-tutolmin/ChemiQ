@@ -1,9 +1,9 @@
 class User {}
 
 export interface IUserResource {
-  create(user: any): boolean;
-  getAll(): User[];
-  getById(id: number): User;
-  updateById(id: number, params: any): boolean;
-  deleteById(id: number): boolean;
+  create(user: any): void;
+  getAll(): Promise<any[]>;
+  getById(id: number): Promise<any>;
+  updateById(id: number, params: any): void;
+  deleteById(id: number): void;
 }
