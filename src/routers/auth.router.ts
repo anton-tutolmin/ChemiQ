@@ -3,29 +3,32 @@ import { AuthController, authController } from "../controllers/auth.controller";
 import { jwtMiddlewate } from "../middleware/auth.middleware";
 
 export class AuthRouter {
-  constructor(private router: Router, private controller: AuthController) {
+  constructor(private _router: Router, private _controller: AuthController) {
     this.setupRouter();
   }
 
   get authRouter(): Router {
-    return this.router;
+    return this._router;
   }
 
   private setupRouter() {
-    this.router
+    this._router
       .route("/login")
 
-      .post(this.controller.login.bind(this.controller));
+      // POST /auth/login/
+      .post(this._controller.login.bind(this._controller));
 
-    this.router
+    this._router
       .route("/register")
 
-      .post(this.controller.register.bind(this.controller));
+      // POST /auth/register/
+      .post(this._controller.register.bind(this._controller));
 
-    this.router
+    this._router
       .route("/profile")
 
-      .get(jwtMiddlewate, this.controller.profile.bind(this.controller));
+      // GET /auth/profile/
+      .get(jwtMiddlewate, this._controller.profile.bind(this._controller));
   }
 }
 
