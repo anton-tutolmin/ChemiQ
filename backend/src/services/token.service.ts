@@ -17,7 +17,7 @@ export class TokenService implements IAuthService {
     if (user.password !== reqBody.password)
       throw new Error(Errors.WrongPassword);
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_KEY + "");
+    const token = jwt.sign({ id: user.id }, "secret");
 
     return token;
   }
@@ -33,9 +33,9 @@ export class TokenService implements IAuthService {
     if (user1) throw new Error(Errors.UsedUsername);
     if (user2) throw new Error(Errors.UsedEmail);
 
-    const id = this._userService.create(reqBody);
-
-    const token = jwt.sign({ id }, process.env.JWT_KEY + "");
+    const id = await this._userService.create(reqBody);
+    console.log(id);
+    const token = jwt.sign({ id }, "secret");
 
     return token;
   }

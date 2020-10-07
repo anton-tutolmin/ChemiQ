@@ -1,12 +1,11 @@
 import { IUserResource } from "../iface/IUserResource";
-import { memResource } from "../resources/memResource";
+import { memResource } from "../resources/userMemResource";
 
 export class UserService {
   constructor(private _resource: IUserResource) {}
 
-  public async create(userBody: any): Promise<string> {
-    await this._resource.create(userBody);
-    return "User created";
+  public async create(userBody: any): Promise<number> {
+    return await this._resource.create(userBody);
   }
 
   public async getAll(): Promise<any> {

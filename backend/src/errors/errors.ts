@@ -7,4 +7,7 @@ export enum Errors {
   UsedUsername = "This username is used already",
   UsedEmail = "This email is used already",
   WrongToken = "Signed token is not correct",
+  InListAlready = "This element in list already",
+  EmptyList = "Element list is empty",
+  NotInList = "There is no such element in list",
 }

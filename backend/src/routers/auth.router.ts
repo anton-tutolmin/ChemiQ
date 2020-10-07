@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { AuthController, authController } from "../controllers/auth.controller";
-import { jwtMiddlewate } from "../middleware/auth.middleware";
+import { jwtMiddleware } from "../middleware/auth.middleware";
 
 export class AuthRouter {
   constructor(private _router: Router, private _controller: AuthController) {
@@ -28,7 +28,7 @@ export class AuthRouter {
       .route("/profile")
 
       // GET /auth/profile/
-      .get(jwtMiddlewate, this._controller.profile.bind(this._controller));
+      .get(jwtMiddleware, this._controller.profile.bind(this._controller));
   }
 }
 

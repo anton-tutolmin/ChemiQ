@@ -1,23 +1,26 @@
-export class ElementService {
-  constructor(private _elementResource: any[]) {}
+import { IElementResource } from "../iface/IElementResource";
+import { elementMemResource } from "../resources/elementMemResource";
 
-  public async add(elementId: number, userId: number): Promise<string> {
-    await this._elementResource.add(elementId, userId);
+export class ElementService {
+  constructor(private _elementResource: IElementResource) {}
+
+  public async add(elemNumber: number, user: any): Promise<string> {
+    await this._elementResource.add(elemNumber, user.id);
     return "Element added in list";
   }
 
-  public async getAll(userId: number): Promise<any[]> {
-    return await this._elementResource.getAll(userId);
-  }
-
-  public async getById(elementId: number): Promise<any> {
-    return await this._elementResource.getById(elementId);
-  }
-
-  public async deleteById(elementId: number): Promise<string> {
-    await this._elementResource.deleteById(elementId);
+  public async remove(elemNumber: number, user: any): Promise<string> {
+    await this._elementResource.remove(elemNumber, user.id);
     return "Element deleted from list";
+  }
+
+  public async getByUserId(user: any): Promise<any[]> {
+    return await this._elementResource.getByUserId(user.id);
+  }
+
+  public async getAll(): Promise<Map<number, any[]>> {
+    return await this._elementResource.getAll();
   }
 }
 
-export const elementService = new ElementService([]);
+export const elementService = new ElementService(elementMemResource);

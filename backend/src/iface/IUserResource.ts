@@ -1,7 +1,5 @@
-class User {}
-
 export interface IUserResource {
-  create(user: any): void;
+  create(user: any): Promise<number>;
   getAll(): Promise<any[]>;
   getById(id: number): Promise<any>;
   getByUsername(username: string): Promise<any>;

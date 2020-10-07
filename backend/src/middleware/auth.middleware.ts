@@ -4,7 +4,7 @@ import { Errors } from "../errors/errors";
 import { userService } from "../services/user.service";
 
 const jwtOption = {
-  secretOrKey: process.env.JWT_KEY + "",
+  secretOrKey: "secret",
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
@@ -23,4 +23,4 @@ passport.use(
   })
 );
 
-export const jwtMiddlewate = passport.authenticate("jwt", { session: false });
+export const jwtMiddleware = passport.authenticate("jwt", { session: false });

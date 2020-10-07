@@ -1,13 +1,14 @@
 import { IUserResource } from "../iface/IUserResource";
 
-export class MemResource implements IUserResource {
+export class UserMemResource implements IUserResource {
   constructor(private _userDb: any[], private _lastId: number) {}
 
-  public async create(user: any): Promise<void> {
-    this._userDb.push({
+  public async create(user: any): Promise<number> {
+    await this._userDb.push({
       ...user,
       id: ++this._lastId,
     });
+    return this._lastId;
   }
 
   public async getAll(): Promise<any[]> {
@@ -38,4 +39,4 @@ export class MemResource implements IUserResource {
   }
 }
 
-export const memResource = new MemResource([], 0);
+export const memResource = new UserMemResource([], 0);
