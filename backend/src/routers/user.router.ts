@@ -34,6 +34,15 @@ export class UserRouter {
 
       // DELETE /users/:id
       .delete(this._userController.deleteById.bind(this._userController));
+
+    this._router
+      .route("/:id/rating")
+
+      // GET /users/:id/rating
+      .get(this._userController.getRatingById.bind(this._userController))
+
+      // PUT /users/:id/rating
+      .put(this._userController.setRatingById.bind(this._userController));
   }
 }
 

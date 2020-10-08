@@ -5,5 +5,10 @@ export interface IUserResource {
   getByUsername(username: string): Promise<any>;
   getByEmail(email: string): Promise<any>;
   updateById(id: number, params: any): void;
-  deleteById(id: number): void;
+  deleteById(id: number): Promise<void>;
+  setRatingById(
+    userId: number,
+    rightAnsers: number,
+    totalAnswers: number
+  ): Promise<void>;
 }

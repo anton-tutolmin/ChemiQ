@@ -33,6 +33,20 @@ export class UserService {
     await this._resource.deleteById(id);
     return "User deleted";
   }
+
+  public async getRatingById(userId: number): Promise<number> {
+    const user = await this._resource.getById(userId);
+    return user.totalAnswer > 0 ? (user.rightAnswer / user.totalAnswer) * 5 : 0;
+  }
+
+  public async setRatingById(
+    userId: number,
+    rightAnswers: number,
+    totalAnswers: number
+  ): Promise<string> {
+    await this._resource.setRatingById(userId, rightAnswers, totalAnswers);
+    return "Rating updated";
+  }
 }
 
 export const userService = new UserService(memResource);

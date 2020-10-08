@@ -37,6 +37,16 @@ export class UserMemResource implements IUserResource {
   public async deleteById(id: number): Promise<void> {
     this._userDb = this._userDb.filter((u) => u.id !== id);
   }
+
+  public async setRatingById(
+    userId: number,
+    rightAnswers: number,
+    totalAnswers: number
+  ): Promise<void> {
+    const user = this._userDb.find((u) => u.id === userId);
+    user.rightAnswers = user.rightAnswers + rightAnswers;
+    user.totalAnswers = user.totalAnswers + totalAnswers;
+  }
 }
 
 export const memResource = new UserMemResource([], 0);

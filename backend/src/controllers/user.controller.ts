@@ -31,6 +31,22 @@ export class UserController {
     const message: string = await this._userService.deleteById(+req.params.id);
     return res.json({ message });
   }
+
+  public async getRatingById(req: Request, res: Response, next: NextFunction) {
+    const rating: number = await this._userService.getRatingById(
+      +req.params.id
+    );
+    return res.json({ rating });
+  }
+
+  public async setRatingById(req: Request, res: Response, next: NextFunction) {
+    const message: string = await this._userService.setRatingById(
+      +req.params.id,
+      req.body.rightAnswer,
+      req.body.totalAnswer
+    );
+    return res.json({ message });
+  }
 }
 
 export const userController = new UserController(userService);
