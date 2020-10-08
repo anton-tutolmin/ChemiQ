@@ -26,14 +26,24 @@ describe("Test user api:", () => {
 
       expect(response.status).toBe(200);
       expect(JSON.parse(response.text).users.length).toBe(1);
-      expect(JSON.parse(response.text).users[0]).toEqual({ ...user, id: 1 });
+      expect(JSON.parse(response.text).users[0]).toEqual({
+        ...user,
+        id: 1,
+        rightAnswers: 0,
+        totalAnswers: 0,
+      });
     });
 
     test("/users/:id", async () => {
       const response = await request(app).get(`/users/${1}`);
 
       expect(response.status).toBe(200);
-      expect(JSON.parse(response.text).user).toEqual({ ...user, id: 1 });
+      expect(JSON.parse(response.text).user).toEqual({
+        ...user,
+        id: 1,
+        rightAnswers: 0,
+        totalAnswers: 0,
+      });
     });
   });
 

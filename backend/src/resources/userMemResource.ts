@@ -7,6 +7,8 @@ export class UserMemResource implements IUserResource {
     await this._userDb.push({
       ...user,
       id: ++this._lastId,
+      rightAnswers: 0,
+      totalAnswers: 0,
     });
     return this._lastId;
   }

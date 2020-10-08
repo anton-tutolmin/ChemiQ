@@ -34,7 +34,7 @@ export class TokenService implements IAuthService {
     if (user2) throw new Error(Errors.UsedEmail);
 
     const id = await this._userService.create(reqBody);
-    console.log(id);
+
     const token = jwt.sign({ id }, "secret");
 
     return token;

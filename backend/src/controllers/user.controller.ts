@@ -5,8 +5,8 @@ export class UserController {
   constructor(private _userService: UserService) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
-    const id: number = await this._userService.create(req.body);
-    return res.json({ id });
+    await this._userService.create(req.body);
+    return res.json({ message: "User created" });
   }
 
   public async getAll(req: Request, res: Response, next: NextFunction) {

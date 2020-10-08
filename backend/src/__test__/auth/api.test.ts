@@ -41,7 +41,12 @@ describe("Test auth api:", () => {
         .set("authorization", `Bearer ${token}`);
 
       expect(response.status).toBe(200);
-      expect(JSON.parse(response.text).user).toEqual({ ...user, id: 1 });
+      expect(JSON.parse(response.text).user).toEqual({
+        ...user,
+        id: 1,
+        rightAnswers: 0,
+        totalAnswers: 0,
+      });
     });
   });
 });
