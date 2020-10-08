@@ -12,7 +12,7 @@ export class ElementController {
     res.send({ message });
   }
 
-  public async deleteById(req: Request, res: Response, next: NextFunction) {
+  public async removeElement(req: Request, res: Response, next: NextFunction) {
     const message: string = await this._elementService.remove(
       req.body.elemNumber,
       req.user

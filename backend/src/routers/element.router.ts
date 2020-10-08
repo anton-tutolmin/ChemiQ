@@ -24,22 +24,19 @@ class ElementRouter {
       // GET /elements/
       .get(
         jwtMiddleware,
-        this._elementController.getAll.bind(this._elementController)
+        this._elementController.getByUserId.bind(this._elementController)
       )
 
       // POST /elements/
       .post(
         jwtMiddleware,
         this._elementController.add.bind(this._elementController)
-      );
-
-    this._router
-      .route("/:id")
+      )
 
       // DELETE /elements/:id
       .delete(
         jwtMiddleware,
-        this._elementController.deleteById.bind(this._elementController)
+        this._elementController.removeElement.bind(this._elementController)
       );
   }
 }

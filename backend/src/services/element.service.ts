@@ -11,7 +11,7 @@ export class ElementService {
 
   public async remove(elemNumber: number, user: any): Promise<string> {
     await this._elementResource.remove(elemNumber, user.id);
-    return "Element deleted from list";
+    return "Element was deleted from list";
   }
 
   public async getByUserId(user: any): Promise<any[]> {

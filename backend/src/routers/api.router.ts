@@ -31,7 +31,7 @@ export class ApiRouter {
 const routesArr: IRouter[] = [
   { url: "/auth", router: authRouter },
   { url: "/users", router: userRouter },
-  { url: "/element", router: elementRouter },
+  { url: "/elements", router: elementRouter },
 ];
 
 export const apiRouter = new ApiRouter(Router(), routesArr).apiRouter;
