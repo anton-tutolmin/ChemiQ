@@ -45,6 +45,13 @@ describe("Test user api:", () => {
         totalAnswers: 0,
       });
     });
+
+    test("/users/:id/rating", async () => {
+      const response = await request(app).get(`/users/${1}/rating`);
+
+      expect(response.status).toBe(200);
+      expect(JSON.parse(response.text).rating).toBe(0);
+    });
   });
 
   describe("PUT request on:", () => {
@@ -55,6 +62,16 @@ describe("Test user api:", () => {
 
       expect(response.status).toBe(200);
       expect(JSON.parse(response.text).message).toBe("User updated");
+    });
+
+    test("/users/:id/rating", async () => {
+      const response = await request(app).put(`/users/${1}/rating`).send({
+        rightAnswers: 7,
+        totalAnswers: 10,
+      });
+
+      expect(response.status).toBe(200);
+      expect(JSON.parse(response.text).message).toBe("Rating updated");
     });
   });
 
