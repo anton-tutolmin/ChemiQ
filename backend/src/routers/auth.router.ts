@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { AuthController, authController } from "../controllers/auth.controller";
-import { jwtMiddleware } from "../middleware/auth.middleware";
+import { Router } from 'express';
+import { AuthController, authController } from '../controllers/auth.controller';
+import { jwtMiddleware } from '../middleware/auth.middleware';
 
 export class AuthRouter {
   constructor(private _router: Router, private _controller: AuthController) {
@@ -13,19 +13,19 @@ export class AuthRouter {
 
   private setupRouter() {
     this._router
-      .route("/login")
+      .route('/login')
 
       // POST /auth/login/
       .post(this._controller.login.bind(this._controller));
 
     this._router
-      .route("/register")
+      .route('/register')
 
       // POST /auth/register/
       .post(this._controller.register.bind(this._controller));
 
     this._router
-      .route("/profile")
+      .route('/profile')
 
       // GET /auth/profile/
       .get(jwtMiddleware, this._controller.profile.bind(this._controller));

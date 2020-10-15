@@ -1,4 +1,4 @@
-import { IElementResource } from "../iface/IElementResource";
+import { IElementResource } from '../iface/IElementResource';
 
 export class ElementMemResource implements IElementResource {
   private _elementLists: Map<number, any[]>;
@@ -10,18 +10,20 @@ export class ElementMemResource implements IElementResource {
   public add(elemNumber: number, userId: number): void {
     const old = this._elementLists.get(userId) || [];
 
-    if (!old.includes(elemNumber))
+    if (!old.includes(elemNumber)) {
       this._elementLists.set(userId, [...old].concat(elemNumber));
+    }
   }
 
   public remove(elemNumber: number, userId: number): void {
     const old = this._elementLists.get(userId) || [];
 
-    if (old.includes(elemNumber))
+    if (old.includes(elemNumber)) {
       this._elementLists.set(
         userId,
         old.filter((e) => e !== elemNumber)
       );
+    }
   }
 
   public getByUserId(userId: number): any[] {

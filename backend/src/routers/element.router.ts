@@ -1,14 +1,14 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   ElementController,
   elementController,
-} from "../controllers/element.controller";
-import { jwtMiddleware } from "../middleware/auth.middleware";
+} from '../controllers/element.controller';
+import { jwtMiddleware } from '../middleware/auth.middleware';
 
 class ElementRouter {
   constructor(
     private _router: Router,
-    private _elementController: ElementController
+    private _elementController: ElementController,
   ) {
     this.setupRouter();
   }
@@ -19,24 +19,24 @@ class ElementRouter {
 
   private setupRouter() {
     this._router
-      .route("/")
+      .route('/')
 
       // GET /elements/
       .get(
         jwtMiddleware,
-        this._elementController.getByUserId.bind(this._elementController)
+        this._elementController.getByUserId.bind(this._elementController),
       )
 
       // POST /elements/
       .post(
         jwtMiddleware,
-        this._elementController.add.bind(this._elementController)
+        this._elementController.add.bind(this._elementController),
       )
 
       // DELETE /elements/:id
       .delete(
         jwtMiddleware,
-        this._elementController.removeElement.bind(this._elementController)
+        this._elementController.removeElement.bind(this._elementController),
       );
   }
 }

@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
-import { IAuthService } from "../iface/IAuthService";
-import { Errors } from "../errors/errors";
-import { UserService, userService } from "./user.service";
+import jsonwebtoken from 'jsonwebtoken';
+import { IAuthService } from '../iface/IAuthService';
+import { Errors } from '../errors/errors';
+import { UserService, userService } from './user.service';
 
 export class TokenService implements IAuthService {
   constructor(private _userService: UserService) {}
@@ -14,10 +14,11 @@ export class TokenService implements IAuthService {
 
     if (!user) throw new Error(Errors.WrongUsername);
 
-    if (user.password !== reqBody.password)
+    if (user.password !== reqBody.password) {
       throw new Error(Errors.WrongPassword);
+    }
 
-    const token = jwt.sign({ id: user.id }, "secret");
+    const token = jwt.sign({ id: user.id }, 'secret');
 
     return token;
   }
@@ -35,7 +36,7 @@ export class TokenService implements IAuthService {
 
     const id = await this._userService.create(reqBody);
 
-    const token = jwt.sign({ id }, "secret");
+    const token = jwt.sign({ id }, 'secret');
 
     return token;
   }
