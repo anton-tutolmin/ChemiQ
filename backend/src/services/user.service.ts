@@ -16,20 +16,19 @@ export class UserService {
     return users.map((u) => new UserDto(u));
   }
 
-  public async getById(id: number): Promise<UserDto | null> {
+  public async getById(id: number): Promise<UserDto> {
     const user = await this._resource.getById(id);
-    if (user) {
-      return new UserDto(user);
-    }
-    return null;
+    return new UserDto(user);
   }
 
-  public async getByUsername(username: string): Promise<any> {
-    return await this._resource.getByParams({ username });
+  public async getByUsername(username: string): Promise<UserDto> {
+    const user = await this._resource.getByParams({ username });
+    return new UserDto(user);
   }
 
-  public async getByEmail(email: string): Promise<any> {
-    return await this._resource.getByParams({ email });
+  public async getByEmail(email: string): Promise<UserDto> {
+    const user = await this._resource.getByParams({ email });
+    return new UserDto(user);
   }
 
   public async updateById(id: number, paramsBody: any): Promise<string> {
@@ -42,11 +41,8 @@ export class UserService {
     return 'User deleted';
   }
 
-  public async getRatingById(userId: number): Promise<number | null> {
+  public async getRatingById(userId: number): Promise<number> {
     const user = await this._resource.getById(userId);
-    if (!user) {
-      return null;
-    }
     return user.totalAnswers > 0 ?
       (user.rightAnswers / user.totalAnswers) * 5
       : 0;
@@ -57,7 +53,7 @@ export class UserService {
     rightAnswers: number,
     totalAnswers: number,
   ): Promise<string> {
-    await this._resource.setRatingById(userId, rightAnswers, totalAnswers);
+    await this._resource.updateById(userId, { rightAnswers, totalAnswers });
     return 'Rating updated';
   }
 }
