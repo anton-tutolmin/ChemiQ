@@ -1,4 +1,4 @@
-import jsonwebtoken from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { IAuthService } from '../iface/IAuthService';
 import { Errors } from '../errors/errors';
 import { UserService, userService } from './user.service';
