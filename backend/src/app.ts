@@ -1,7 +1,7 @@
-import express from "express";
-import bodyParser from "body-parser";
-import passport from "passport";
-import { apiRouter } from "./routers/api.router";
+import express from 'express';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import { apiRouter } from './routers/api.router';
 
 const app: express.Application = express();
 

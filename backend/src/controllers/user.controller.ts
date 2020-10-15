@@ -1,12 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-import { UserService, userService } from "../services/user.service";
+import { Request, Response, NextFunction } from 'express';
+import { UserService, userService } from '../services/user.service';
 
 export class UserController {
   constructor(private _userService: UserService) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
+    console.log(req);
     await this._userService.create(req.body);
-    return res.json({ message: "User created" });
+    return res.json({ message: 'User created' });
   }
 
   public async getAll(req: Request, res: Response, next: NextFunction) {
@@ -22,7 +23,7 @@ export class UserController {
   public async updateById(req: Request, res: Response, next: NextFunction) {
     const message: string = await this._userService.updateById(
       +req.params.id,
-      req.body
+      req.body,
     );
     return res.json({ message });
   }
@@ -34,7 +35,7 @@ export class UserController {
 
   public async getRatingById(req: Request, res: Response, next: NextFunction) {
     const rating: number = await this._userService.getRatingById(
-      +req.params.id
+      +req.params.id,
     );
     return res.json({ rating });
   }
@@ -43,7 +44,7 @@ export class UserController {
     const message: string = await this._userService.setRatingById(
       +req.params.id,
       req.body.rightAnswer,
-      req.body.totalAnswer
+      req.body.totalAnswer,
     );
     return res.json({ message });
   }

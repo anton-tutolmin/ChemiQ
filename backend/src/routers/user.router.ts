@@ -1,10 +1,10 @@
-import { Router } from "express";
-import { UserController, userController } from "../controllers/user.controller";
+import { Router } from 'express';
+import { UserController, userController } from '../controllers/user.controller';
 
 export class UserRouter {
   constructor(
     private _router: Router,
-    private _userController: UserController
+    private _userController: UserController,
   ) {
     this.setupRouter();
   }
@@ -15,7 +15,7 @@ export class UserRouter {
 
   private setupRouter() {
     this._router
-      .route("/")
+      .route('/')
 
       // GET /users/
       .get(this._userController.getAll.bind(this._userController))
@@ -24,7 +24,7 @@ export class UserRouter {
       .post(this._userController.create.bind(this._userController));
 
     this._router
-      .route("/:id")
+      .route('/:id')
 
       // GET /users/:id
       .get(this._userController.getById.bind(this._userController))
@@ -36,7 +36,7 @@ export class UserRouter {
       .delete(this._userController.deleteById.bind(this._userController));
 
     this._router
-      .route("/:id/rating")
+      .route('/:id/rating')
 
       // GET /users/:id/rating
       .get(this._userController.getRatingById.bind(this._userController))

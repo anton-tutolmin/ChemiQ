@@ -1,8 +1,8 @@
-import dotev from "dotenv-flow";
-import pino from "pino";
-import app from "./app";
+import dotenvFlow from 'dotenv-flow';
+import pino from 'pino';
+import app from './app';
 
-dotev.config();
+dotenvFlow.config();
 
 const logger = pino();
 

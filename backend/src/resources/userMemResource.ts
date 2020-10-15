@@ -1,12 +1,13 @@
-import { IUserResource } from "../iface/IUserResource";
+import { IUserResource } from '../iface/IUserResource';
 
 export class UserMemResource implements IUserResource {
   constructor(private _userDb: any[], private _lastId: number) {}
 
   public async create(user: any): Promise<number> {
-    await this._userDb.push({
+    this._lastId += 1;
+    this._userDb.push({
       ...user,
-      id: ++this._lastId,
+      id: this._lastId,
       rightAnswers: 0,
       totalAnswers: 0,
     });
@@ -19,6 +20,10 @@ export class UserMemResource implements IUserResource {
 
   public async getById(id: number): Promise<any> {
     return this._userDb.find((u) => u.id === id);
+  }
+
+  public async getByParams(params: any): Promise<any> {
+    return {};
   }
 
   public async getByUsername(username: string): Promise<any> {
@@ -43,7 +48,7 @@ export class UserMemResource implements IUserResource {
   public async setRatingById(
     userId: number,
     rightAnswers: number,
-    totalAnswers: number
+    totalAnswers: number,
   ): Promise<void> {
     const user = this._userDb.find((u) => u.id === userId);
     user.rightAnswers = user.rightAnswers + rightAnswers;
