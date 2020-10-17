@@ -1,4 +1,4 @@
-import { IElementResource } from '../iface/iElementResource';
+import { IElementResource } from '../../iface/iElementResource';
 
 export class ElementMemResource implements IElementResource {
   private _elementLists: Map<number, any[]>;

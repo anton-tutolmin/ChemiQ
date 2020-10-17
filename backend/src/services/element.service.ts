@@ -1,5 +1,5 @@
 import { IElementResource } from '../iface/iElementResource';
-import { elementMemResource } from '../resources/elementMemResource';
+import { elementMemResource } from '../resources/mock/elementMemResource';
 
 export class ElementService {
   constructor(private _elementResource: IElementResource) {}

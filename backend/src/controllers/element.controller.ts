@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { ElementService, elementService } from "../services/element.service";
+import { Request, Response, NextFunction } from 'express';
+import { ElementService, elementService } from '../services/element.service';
 
 export class ElementController {
   constructor(private _elementService: ElementService) {}
@@ -7,7 +7,7 @@ export class ElementController {
   public async add(req: Request, res: Response, next: NextFunction) {
     const message = await this._elementService.add(
       req.body.elemNumber,
-      req.user
+      req.user,
     );
     res.send({ message });
   }
@@ -15,7 +15,7 @@ export class ElementController {
   public async removeElement(req: Request, res: Response, next: NextFunction) {
     const message: string = await this._elementService.remove(
       req.body.elemNumber,
-      req.user
+      req.user,
     );
     return res.json({ message });
   }
