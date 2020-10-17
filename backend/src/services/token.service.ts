@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { IAuthService } from '../iface/IAuthService';
+import { IAuthService } from '../iface/iAuthService';
 import { Errors } from '../errors/errors';
 import { UserService, userService } from './user.service';
 
@@ -34,9 +34,9 @@ export class TokenService implements IAuthService {
     if (user1) throw new Error(Errors.UsedUsername);
     if (user2) throw new Error(Errors.UsedEmail);
 
-    const id = await this._userService.create(reqBody);
+    const user = await this._userService.create(reqBody);
 
-    const token = jwt.sign({ id }, 'secret');
+    const token = jwt.sign({ id: user.id }, 'secret');
 
     return token;
   }

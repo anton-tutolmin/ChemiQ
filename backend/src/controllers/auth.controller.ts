@@ -1,22 +1,22 @@
-import { Request, Response, NextFunction } from "express";
-import { IAuthService } from "../iface/IAuthService";
-import { tokenService } from "../services/token.service";
+import { Request, Response, NextFunction } from 'express';
+import { IAuthService } from '../iface/iAuthService';
+import { tokenService } from '../services/token.service';
 
 export class AuthController {
   constructor(private authService: IAuthService) {}
 
   public async login(req: Request, res: Response, next: NextFunction) {
     const token = await this.authService.login({ ...req.body });
-    res.send({ token });
+    return res.json({ token });
   }
 
   public async register(req: Request, res: Response, next: NextFunction) {
     const token = await this.authService.register({ ...req.body });
-    res.send({ token });
+    return res.json({ token });
   }
 
   public async profile(req: Request, res: Response, next: NextFunction) {
-    res.send({ user: req.user });
+    res.json({ user: req.user });
   }
 }
 

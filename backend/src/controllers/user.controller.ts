@@ -1,23 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserService, userService } from '../services/user.service';
+import { UserDto } from '../dto/user.dto';
+import { User } from '../models/user.model';
+import { Errors } from '../errors/errors';
 
 export class UserController {
   constructor(private _userService: UserService) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
-    console.log(req);
-    await this._userService.create(req.body);
-    return res.json({ message: 'User created' });
+    const user: User = await this._userService.create(req.body);
+    return res.json({ user: new UserDto(user) });
   }
 
   public async getAll(req: Request, res: Response, next: NextFunction) {
-    const users: any = await this._userService.getAll();
-    return res.json({ users });
+    const users: User[] = await this._userService.getAll();
+    return res.json({ users: users.map((u) => new UserDto(u)) });
   }
 
   public async getById(req: Request, res: Response, next: NextFunction) {
-    const user: any = await this._userService.getById(+req.params.id);
-    return res.json({ user });
+    const user = await this._userService.getById(+req.params.id);
+
+    if (!user) throw new Error(Errors.NoUser);
+
+    return res.json({ user: new UserDto(user) });
   }
 
   public async updateById(req: Request, res: Response, next: NextFunction) {

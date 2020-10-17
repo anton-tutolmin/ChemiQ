@@ -1,4 +1,4 @@
-import { IElementResource } from '../iface/IElementResource';
+import { IElementResource } from '../iface/iElementResource';
 import { elementMemResource } from '../resources/elementMemResource';
 
 export class ElementService {

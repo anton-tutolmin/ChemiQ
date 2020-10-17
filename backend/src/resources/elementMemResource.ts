@@ -1,4 +1,4 @@
-import { IElementResource } from '../iface/IElementResource';
+import { IElementResource } from '../iface/iElementResource';
 
 export class ElementMemResource implements IElementResource {
   private _elementLists: Map<number, any[]>;
@@ -21,7 +21,7 @@ export class ElementMemResource implements IElementResource {
     if (old.includes(elemNumber)) {
       this._elementLists.set(
         userId,
-        old.filter((e) => e !== elemNumber)
+        old.filter((e) => e !== elemNumber),
       );
     }
   }

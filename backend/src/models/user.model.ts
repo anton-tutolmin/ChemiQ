@@ -35,10 +35,12 @@ User.init(
     rightAnswers: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
     totalAnswers: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
   },
   {

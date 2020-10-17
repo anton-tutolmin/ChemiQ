@@ -1,34 +1,27 @@
 import { User } from '../models/user.model';
-import { IUserResource } from '../iface/IUserResource';
-import { Errors } from '../errors/errors';
+import { IUserResource } from '../iface/iUserResource';
+import { IUser } from '../iface/iUser';
 
 export class UserPostgresResource implements IUserResource {
   constructor() {
-    User.sync({ force: true });
+    User.sync();
   }
 
-  public async create(user: any): Promise<number> {
-    const result: User = await User.create<User>(user);
-    return result.id;
+  public async create(user: IUser): Promise<User> {
+    return await User.create<User>(user);
   }
 
   public async getAll(): Promise<User[]> {
     return await User.findAll<User>({});
   }
 
-  public async getById(id: number): Promise<User> {
+  public async getById(id: number): Promise<User | null> {
     const user = await User.findByPk<User>(id);
-    if (!user) {
-      throw new Error(Errors.NoUser);
-    }
     return user;
   }
 
-  public async getByParams(params: any): Promise<User> {
+  public async getByParams(params: any): Promise<User | null> {
     const user = await User.findOne<User>({ where: { ...params } });
-    if (!user) {
-      throw new Error(Errors.NoUser);
-    }
     return user;
   }
 

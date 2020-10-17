@@ -1,13 +1,13 @@
-import { IUser } from '../iface/IUser';
+import { IUser } from '../iface/iUser';
 import { User } from '../models/user.model';
-import { IUserResource } from '../iface/IUserResource';
+import { IUserResource } from '../iface/iUserResource';
 import { userPostgresResource } from '../resources/userPosrgresResources';
 
 export class UserService {
   constructor(private _resource: IUserResource) {}
 
-  public async create(reqBody: any): Promise<number> {
-    const params: IUser = reqBody;
+  public async create(reqBody: any): Promise<User> {
+    const params: IUser = { ...reqBody };
     return await this._resource.create(params);
   }
 
@@ -15,15 +15,15 @@ export class UserService {
     return await this._resource.getAll();
   }
 
-  public async getById(id: number): Promise<User> {
+  public async getById(id: number): Promise<User | null> {
     return await this._resource.getById(id);
   }
 
-  public async getByUsername(username: string): Promise<User> {
+  public async getByUsername(username: string): Promise<User | null> {
     return await this._resource.getByParams({ username });
   }
 
-  public async getByEmail(email: string): Promise<User> {
+  public async getByEmail(email: string): Promise<User | null> {
     return await this._resource.getByParams({ email });
   }
 
@@ -39,9 +39,7 @@ export class UserService {
 
   public async getRatingById(userId: number): Promise<number> {
     const user = await this._resource.getById(userId);
-    return user.totalAnswers > 0 ?
-      (user.rightAnswers / user.totalAnswers) * 5
-      : 0;
+    return user ? this.calcRating(user.rightAnswers, user.totalAnswers) : 0;
   }
 
   public async setRatingById(
@@ -51,6 +49,10 @@ export class UserService {
   ): Promise<string> {
     await this._resource.updateById(userId, { rightAnswers, totalAnswers });
     return 'Rating updated';
+  }
+
+  public calcRating(rights: number, total: number): number {
+    return total > 0 ? (rights / total) * 5 : 0;
   }
 }
 
