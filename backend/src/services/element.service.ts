@@ -21,8 +21,9 @@ export class ElementService {
     return 'Element was deleted from list';
   }
 
-  public async getByUserId(user: any): Promise<Element[]> {
-    return await this._elementResource.getByUserId(user.id);
+  public async getByUserId(user: any): Promise<number[]> {
+    const elements: Element[] = await this._elementResource.getByUserId(user.id);
+    return elements.map(e => e.elementNumber);
   }
 }
 

@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { ElementService, elementService } from '../services/element.service';
-import { Element } from '../models/element.model';
-import { ElementDto } from '../dto/element.dto';
 
 export class ElementController {
   constructor(private _elementService: ElementService) {}
@@ -23,8 +21,8 @@ export class ElementController {
   }
 
   public async getByUserId(req: Request, res: Response, next: NextFunction) {
-    const elements: Element[] = await this._elementService.getByUserId(req.user);
-    return res.json({ elements: elements.map(e => new ElementDto(e)) });
+    const elements: number[] = await this._elementService.getByUserId(req.user);
+    return res.json({ elements });
   }
 }
 
