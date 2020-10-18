@@ -1,7 +1,7 @@
 import { IUser } from '../iface/iUser';
 import { User } from '../models/user.model';
 import { IUserResource } from '../iface/iUserResource';
-import { userPostgresResource } from '../resources/userPosrgresResources';
+import { userPostgresResource } from '../resources/postgres/userPosrgresResources';
 
 export class UserService {
   constructor(private _resource: IUserResource) {}

@@ -1,26 +1,29 @@
+import { Element } from '../models/element.model';
+import { IElement } from '../iface/iElement';
 import { IElementResource } from '../iface/iElementResource';
-import { elementMemResource } from '../resources/mock/elementMemResource';
+import { elementPostgresResource } from '../resources/postgres/elementPostgresResource';
 
 export class ElementService {
   constructor(private _elementResource: IElementResource) {}
 
-  public async add(elemNumber: number, user: any): Promise<string> {
-    await this._elementResource.add(elemNumber, user.id);
+  public async add(reqBody: any): Promise<string> {
+    const element: IElement = {
+      elementNumber: reqBody.elementNumber,
+      userId: reqBody.user.id,
+    };
+
+    await this._elementResource.add(element);
     return 'Element added in list';
   }
 
-  public async remove(elemNumber: number, user: any): Promise<string> {
-    await this._elementResource.remove(elemNumber, user.id);
+  public async remove(elementNumber: number, user: any): Promise<string> {
+    await this._elementResource.remove(elementNumber, user.id);
     return 'Element was deleted from list';
   }
 
-  public async getByUserId(user: any): Promise<any[]> {
+  public async getByUserId(user: any): Promise<Element[]> {
     return await this._elementResource.getByUserId(user.id);
-  }
-
-  public async getAll(): Promise<Map<number, any[]>> {
-    return await this._elementResource.getAll();
   }
 }
 
-export const elementService = new ElementService(elementMemResource);
+export const elementService = new ElementService(elementPostgresResource);

@@ -1,14 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { ElementService, elementService } from '../services/element.service';
+import { Element } from '../models/element.model';
+import { ElementDto } from '../dto/element.dto';
 
 export class ElementController {
   constructor(private _elementService: ElementService) {}
 
   public async add(req: Request, res: Response, next: NextFunction) {
-    const message = await this._elementService.add(
-      req.body.elemNumber,
-      req.user,
-    );
+    const message = await this._elementService.add({
+      elementNumber: req.body.elementNumber,
+      user: req.user,
+    });
     res.send({ message });
   }
 
@@ -21,13 +23,8 @@ export class ElementController {
   }
 
   public async getByUserId(req: Request, res: Response, next: NextFunction) {
-    const elements = await this._elementService.getByUserId(req.user);
-    return res.json({ elements });
-  }
-
-  public async getAll(req: Request, res: Response, next: NextFunction) {
-    const elements = await this._elementService.getAll();
-    return res.json({ elements });
+    const elements: Element[] = await this._elementService.getByUserId(req.user);
+    return res.json({ elements: elements.map(e => new ElementDto(e)) });
   }
 }
 

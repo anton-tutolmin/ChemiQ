@@ -1,13 +1,14 @@
 import { IElementResource } from '../../iface/iElementResource';
 import { Element } from '../../models/element.model';
+import { IElement } from '../../iface/iElement';
 
 export class ElementPostgresResource implements IElementResource {
   constructor() {
     Element.sync();
   }
 
-  public async add(elementNumber: number, userId: number): Promise<void> {
-    await Element.create({ userId, elementNumber });
+  public async add(element: IElement): Promise<void> {
+    await Element.create(element);
   }
 
   public async remove(elementNumber: number, userId: number): Promise<void> {
@@ -17,5 +18,6 @@ export class ElementPostgresResource implements IElementResource {
   public async getByUserId(userId: number): Promise<Element[]> {
     return await Element.findAll({ where: { userId } });
   }
-
 }
+
+export const elementPostgresResource = new ElementPostgresResource();

@@ -1,6 +1,6 @@
-import { User } from '../models/user.model';
-import { IUserResource } from '../iface/iUserResource';
-import { IUser } from '../iface/iUser';
+import { User } from '../../models/user.model';
+import { IUserResource } from '../../iface/iUserResource';
+import { IUser } from '../../iface/iUser';
 
 export class UserPostgresResource implements IUserResource {
   constructor() {
