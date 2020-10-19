@@ -8,50 +8,81 @@ export class UserController {
   constructor(private _userService: UserService) {}
 
   public async create(req: Request, res: Response, next: NextFunction) {
-    const user: User = await this._userService.create(req.body);
-    return res.json({ user: new UserDto(user) });
+    try {
+      const user: User = await this._userService.create(req.body);
+      return res.json({ user: new UserDto(user) });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async getAll(req: Request, res: Response, next: NextFunction) {
-    const users: User[] = await this._userService.getAll();
-    return res.json({ users: users.map((u) => new UserDto(u)) });
+    try {
+      const users: User[] = await this._userService.getAll();
+      return res.json({ users: users.map((u) => new UserDto(u)) });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async getById(req: Request, res: Response, next: NextFunction) {
-    const user = await this._userService.getById(+req.params.id);
+    try {
+      const user = await this._userService.getById(+req.params.id);
 
-    if (!user) throw new Error(Errors.NoUser);
+      if (!user) throw new Error(Errors.NoUser);
 
-    return res.json({ user: new UserDto(user) });
+      return res.json({ user: new UserDto(user) });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async updateById(req: Request, res: Response, next: NextFunction) {
-    const message: string = await this._userService.updateById(
-      +req.params.id,
-      req.body,
-    );
-    return res.json({ message });
+    try {
+      const message: string = await this._userService.updateById(
+        +req.params.id,
+        req.body,
+      );
+
+      return res.json({ message });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async deleteById(req: Request, res: Response, next: NextFunction) {
-    const message: string = await this._userService.deleteById(+req.params.id);
-    return res.json({ message });
+    try {
+      const message: string = await this._userService.deleteById(+req.params.id);
+      return res.json({ message });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async getRatingById(req: Request, res: Response, next: NextFunction) {
-    const rating: number = await this._userService.getRatingById(
-      +req.params.id,
-    );
-    return res.json({ rating });
+    try {
+      const rating: number = await this._userService.getRatingById(
+        +req.params.id,
+      );
+
+      return res.json({ rating });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async setRatingById(req: Request, res: Response, next: NextFunction) {
-    const message: string = await this._userService.setRatingById(
-      +req.params.id,
-      req.body.rightAnswer,
-      req.body.totalAnswer,
-    );
-    return res.json({ message });
+    try {
+      const message: string = await this._userService.setRatingById(
+        +req.params.id,
+        req.body.rightAnswer,
+        req.body.totalAnswer,
+      );
+
+      return res.json({ message });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 }
 

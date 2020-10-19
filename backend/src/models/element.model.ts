@@ -9,10 +9,13 @@ export class Element extends Model {
 Element.init(
   {
     userId: {
+      allowNull: false,
+      unique: 'element-user',
       type: DataTypes.INTEGER,
     },
     elementNumber: {
       type: new DataTypes.STRING(128),
+      unique: 'element-user',
       allowNull: false,
     },
   },

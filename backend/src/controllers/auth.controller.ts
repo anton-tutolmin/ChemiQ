@@ -6,17 +6,29 @@ export class AuthController {
   constructor(private authService: IAuthService) {}
 
   public async login(req: Request, res: Response, next: NextFunction) {
-    const token = await this.authService.login({ ...req.body });
-    return res.json({ token });
+    try {
+      const token = await this.authService.login({ ...req.body });
+      return res.json({ token });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async register(req: Request, res: Response, next: NextFunction) {
-    const token = await this.authService.register({ ...req.body });
-    return res.json({ token });
+    try {
+      const token = await this.authService.register({ ...req.body });
+      return res.json({ token });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 
   public async profile(req: Request, res: Response, next: NextFunction) {
-    res.json({ user: req.user });
+    try {
+      return res.json({ user: req.user });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
   }
 }
 
