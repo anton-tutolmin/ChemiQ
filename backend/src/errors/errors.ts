@@ -3,7 +3,7 @@ export enum Errors {
   NoPassword = 'Password is not defined',
   NoEmail = 'Email is not defined',
   WrongUsername = 'No user with that username',
-  WrongPassword = 'Password password',
+  WrongPassword = 'Wrong password',
   UsedUsername = 'This username is used already',
   UsedEmail = 'This email is used already',
   WrongToken = 'Signed token is not correct',
@@ -11,4 +11,8 @@ export enum Errors {
   EmptyList = 'Element list is empty',
   NotInList = 'There is no such element in list',
   NoUser = 'There is no user',
+  NotCorrectEmail = 'Email is not correct',
+  NotCorrectUsername = 'Username is not correct',
+  NotCorrectPassword = 'Password is not correct',
+  ExcessFields = 'Request has excess fields',
 }

@@ -4,7 +4,7 @@ import { IElement } from '../../iface/iElement';
 
 export class ElementPostgresResource implements IElementResource {
   constructor() {
-    Element.sync({ force: true });
+    Element.sync();
   }
 
   public async add(element: IElement): Promise<void> {

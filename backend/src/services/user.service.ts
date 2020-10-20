@@ -2,12 +2,14 @@ import { IUser } from '../iface/iUser';
 import { User } from '../models/user.model';
 import { IUserResource } from '../iface/iUserResource';
 import { userPostgresResource } from '../resources/postgres/userPosrgresResources';
+import { ValidationService, validationService } from './validation.service';
 
 export class UserService {
-  constructor(private _resource: IUserResource) {}
+  constructor(private _resource: IUserResource, private _validation: ValidationService) {}
 
   public async create(reqBody: any): Promise<User> {
     const params: IUser = { ...reqBody };
+    this._validation.validateCreateBody(params);
     return await this._resource.create(params);
   }
 
@@ -28,6 +30,7 @@ export class UserService {
   }
 
   public async updateById(id: number, paramsBody: any): Promise<string> {
+    this._validation.validateUpdateBody(paramsBody);
     await this._resource.updateById(id, paramsBody);
     return 'User updated';
   }
@@ -56,4 +59,4 @@ export class UserService {
   }
 }
 
-export const userService = new UserService(userPostgresResource);
+export const userService = new UserService(userPostgresResource, validationService);
