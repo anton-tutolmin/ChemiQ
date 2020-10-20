@@ -24,16 +24,22 @@ export class ValidationService {
     }
   }
 
-  public validateUsername(username: string): boolean {
-    throw new Error(Errors.NotCorrectUsername);
+  public validateUsername(username: string) {
+    if (username.length < 6 || username.length > 20) {
+      throw new Error(Errors.NotCorrectUsername);
+    }
   }
 
-  public validatePassword(password: string): boolean {
-    throw new Error(Errors.NotCorrectPassword);
+  public validatePassword(password: string) {
+    if (password.length < 6 || password.length > 20) {
+      throw new Error(Errors.NotCorrectPassword);
+    }
   }
 
-  public validateEmail(email: string): boolean {
-    throw new Error(Errors.NotCorrectEmail);
+  public validateEmail(email: string) {
+    if (email.length < 6 || email.length > 20) {
+      throw new Error(Errors.NotCorrectEmail);
+    }
   }
 }
 
