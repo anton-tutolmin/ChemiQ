@@ -15,4 +15,5 @@ export enum Errors {
   NotCorrectUsername = 'Username is not correct',
   NotCorrectPassword = 'Password is not correct',
   ExcessFields = 'Request has excess fields',
+  WrongElementNumber = 'Not correct element number',
 }

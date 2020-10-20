@@ -18,6 +18,12 @@ export class ValidationService {
     }
   }
 
+  public validateElementNumber(elementNumber: number) {
+    if (elementNumber < 1 && elementNumber > 118) {
+      throw new Error(Errors.WrongElementNumber);
+    }
+  }
+
   public validateUsername(username: string): boolean {
     throw new Error(Errors.NotCorrectUsername);
   }

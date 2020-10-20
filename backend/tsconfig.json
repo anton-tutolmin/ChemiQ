@@ -10,8 +10,8 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    // "experimentalDecorators": true,
+    // "emitDecoratorMetadata": true,
     "paths": {
       "*": ["node_modules/*"]
     }
