@@ -1,10 +1,12 @@
 import * as jwt from 'jsonwebtoken';
 import { IAuthService } from '../iface/iAuthService';
+import { IHashService } from '../iface/IHashService';
 import { Errors } from '../errors/errors';
 import { UserService, userService } from './user.service';
+import { bcryptService } from './hash.service';
 
 export class TokenService implements IAuthService {
-  constructor(private _userService: UserService) {}
+  constructor(private _userService: UserService, private _hasher: IHashService) {}
 
   public async login(reqBody: any): Promise<string> {
     if (!reqBody.username) throw Error(Errors.NoUsername);
@@ -13,6 +15,8 @@ export class TokenService implements IAuthService {
     const user = await this._userService.getByUsername(reqBody.username);
 
     if (!user) throw new Error(Errors.WrongUsername);
+
+    const isValidPassword = await this._hasher.isValidPassword(reqBody.password, user.password);
 
     if (user.password !== reqBody.password) {
       throw new Error(Errors.WrongPassword);
@@ -42,4 +46,4 @@ export class TokenService implements IAuthService {
   }
 }
 
-export const tokenService = new TokenService(userService);
+export const tokenService = new TokenService(userService, bcryptService);
