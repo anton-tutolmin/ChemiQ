@@ -1,15 +1,22 @@
 import { IUser } from '../iface/iUser';
 import { User } from '../models/user.model';
 import { IUserResource } from '../iface/iUserResource';
+import { IHashService } from '../iface/IHashService';
 import { userPostgresResource } from '../resources/postgres/userPosrgresResources';
+import { bcryptService } from './hash.service';
 import { ValidationService, validationService } from './validation.service';
 
 export class UserService {
-  constructor(private _resource: IUserResource, private _validation: ValidationService) {}
+  constructor(
+    private _resource: IUserResource,
+    private _hasher: IHashService,
+    private _validation: ValidationService,
+  ) {}
 
   public async create(reqBody: any): Promise<User> {
     const params: IUser = { ...reqBody };
     this._validation.validateCreateBody(params);
+    params.password = await this._hasher.hashPassword(params.password);
     return await this._resource.create(params);
   }
 
@@ -59,4 +66,4 @@ export class UserService {
   }
 }
 
-export const userService = new UserService(userPostgresResource, validationService);
+export const userService = new UserService(userPostgresResource, bcryptService, validationService);
