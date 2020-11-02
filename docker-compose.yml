@@ -1,0 +1,31 @@
+version: "3.8"
+
+volumes:
+  db-data:
+
+services:
+  # web:
+  #   image: node:12-alpine
+  #   tty: true
+  #   working_dir: /hone/node/app
+  #   command: "npm run dev"
+  #   volumes:
+  #     - ./backend:/hone/node/app
+  #     - .frontend/public:/home/node/public
+  #   ports: 80:8080
+
+  db:
+    image: postgres:latest
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: chemiq
+      POSTGRES_PASSWORD: chemi@Q
+
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./ops/db-backups:/backup
+
+    ports:
+      - 5432:5432
