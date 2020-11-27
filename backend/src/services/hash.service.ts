@@ -1,17 +1,16 @@
-import bcrypt from 'bcrypt';
+import argon2 from 'argon2';
 import { IHashService } from '../iface/IHashService';
 
 export class HashService implements IHashService {
-  constructor(private _hasher: any, private _saltRounds: number) {}
+  constructor(private _hasher: any) {}
 
   public async hashPassword(password: string): Promise<string> {
-    const salt = await this._hasher.genSalt(this._saltRounds);
-    return await this._hasher.hash(password, salt);
+    return await this._hasher.hash(password);
   }
 
-  public async isValidPassword(password: string, hash: string): Promise<void> {
-    return this._hasher.compare(password, hash);
+  public async isValidPassword(password: string, hash: string): Promise<boolean> {
+    return await this._hasher.compare(password, hash);
   }
 }
 
-export const bcryptService = new HashService(bcrypt, 10);
+export const bcryptService = new HashService(argon2);

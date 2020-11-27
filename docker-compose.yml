@@ -4,15 +4,16 @@ volumes:
   db-data:
 
 services:
-  # web:
-  #   image: node:12-alpine
-  #   tty: true
-  #   working_dir: /hone/node/app
-  #   command: "npm run dev"
-  #   volumes:
-  #     - ./backend:/hone/node/app
-  #     - .frontend/public:/home/node/public
-  #   ports: 80:8080
+  web:
+    image: node:12-alpine
+    tty: true
+    working_dir: /home/node/app
+    command: "npm run dev"
+    volumes:
+      - ./backend:/home/node/app
+      - ./frontend/public:/home/node/public
+    ports:
+      - 80:8080
 
   db:
     image: postgres:latest

@@ -7,7 +7,7 @@ export const sequelize = new Sequelize({
   username: 'postgres',
   password: 'chemi@Q',
   database: 'chemiq',
-  host: 'localhost',
+  host: 'db',
   dialect: 'postgres',
   logging: msg => logger.info(msg),
 });

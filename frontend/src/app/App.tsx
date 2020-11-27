@@ -1,6 +1,14 @@
 import React from "react";
-import "./App.sass";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import "./App.scss";
 
-export const App = () => {
-  return <div>Hello</div>;
+export const App: React.FC = () => {
+  return (
+    <>
+      <Navbar />
+      <div className="container main"></div>
+      <Footer />
+    </>
+  );
 };
